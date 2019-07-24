@@ -1,5 +1,8 @@
-const robinRepo = require('../robins/repository');
+//Excerpt from a Node.js MVC webapp. This part handles registration and password reset
+// By Alec Moore
+
 const User = require('../../models/users');
+const robinRepo = require('../robins/repository');
 const bcrypt = require('bcrypt');
 const emailer = require('../../common/emailer');
 
