@@ -1,21 +1,23 @@
 const repo = require('./repository');
 
 function registerPage(req, res){
-    res.render('register', {});
+    return res.render('register', {});
 }
 
 function verificationCodePage(req, res){
     const secret = req.query.session;
     const message = req.query.message || '';
-    res.render('register_verify', {secret, message});
+    if(!secret) 
+        return res.status(400).end();
+    return res.render('register_verify', {secret, message});
 }
 
 function verify(req, res){
     const {code, secret} = req.body;
-    console.log(req.body);
     repo.verifyAccount(code, secret, (err) => {
-        if(err) res.redirect(`/register/verify?session=${secret}&message=${err.msg}`);
-        else res.redirect('/login');
+        if(err) 
+            return res.redirect(`/register/verify?session=${secret}&message=${err.msg}`);
+        return res.redirect('/login');
     })
 }
 
@@ -57,9 +59,11 @@ function forgotPasswordPage(req, res){
 function changePasswordPage(req, res){
     let {key} = req.params;
     repo.verifyResetCode(key, (err, isMatch) => {
-        if(err) res.redirect('/404');
-        else if(isMatch) res.render('forgot_password_change', {key});
-        else res.redirect('/404');
+        if(err) 
+            return res.redirect('/404');
+        else if(isMatch) 
+            return res.render('forgot_password_change', {key});
+        return res.redirect('/404');
     })
     
 }
@@ -85,18 +89,22 @@ function changePassword(req, res){
     let {key} = req.params;
     let {password, password_confirm} = req.body;
 
-    if(password != password_confirm) return res.redirect('/reset/' + key + '?msg=Password mismatch');
+    if(password != password_confirm) 
+        return res.redirect('/reset/' + key + '?msg=Password mismatch');
     else repo.verifyResetCode(key, (err, isMatch) => {
-        if(err) return res.render('forgot_password', {
-            message:{
-                error: true, 
-                message: err.msg || err 
-            }
-        });
-        if(!isMatch) return res.redirect('back');
+        if(err) 
+            return res.render('forgot_password', {
+                message:{
+                    error: true, 
+                    message: err.msg || err 
+                }
+            });
+        if(!isMatch) 
+            return res.redirect('back');
         repo.resetPassword(key, password, (err) => {
-            if(err) res.redirect('/reset/' + key);
-            else res.render('login', {
+            if(err) 
+                return res.redirect('/reset/' + key);
+            return res.render('login', {
                 message:{
                     success:true, 
                     message:'/?msg=Success! Password reset.'
