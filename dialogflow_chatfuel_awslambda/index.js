@@ -1,5 +1,6 @@
+// Snippet of code for FB messenger bots that allows Dialogflow API and Chatfuel API to communicate together in the same language. Hosted on AWS Lambda.
 // Written June 2019
-// Alec
+// By Alec
 
 const fs = require('fs');
 const dialogflow = require('dialogflow');
