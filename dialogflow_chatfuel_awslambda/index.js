@@ -1,12 +1,9 @@
-//@ts-check
-
-// Note: make sure to set MONGO_URL in the environment...
 // Written June 2019
-// alec@hivemindai.com
+// Alec
 
 const fs = require('fs');
 const dialogflow = require('dialogflow');
-const endpointApi = require('./models/api');
+const endpointApi = require('./models/api'); // MONGODB model
 
 exports.handler = async (event) => {
     const { 
@@ -20,7 +17,7 @@ exports.handler = async (event) => {
 
     endpointApi.findOne({ api_key }, (err, doc) => {
         if(!err && doc){
-            console.log(`& Chatfuel request recieved => ${project}`);
+            console.log(`Chatfuel request recieved for ${project}`);
             doc.uses += 1;
             doc.save((err) => {
                 if(err) 
@@ -82,8 +79,11 @@ function sendQuery(projectId, key, client, sessionId, query, callback){
     let promise = sessionClient.detectIntent(request);
     promise.then(responses => {
         let chatfuelPayload = {};
+	    
         for(let i = 0; responses[0].queryResult.fulfillmentMessages[i]; i++){
+		
             let fulfillmentMsg = responses[0].queryResult.fulfillmentMessages[i];
+		
             if(fulfillmentMsg.platform == "PLATFORM_UNSPECIFIED"){
                 switch(fulfillmentMsg.message){
                     case "text":
@@ -95,6 +95,7 @@ function sendQuery(projectId, key, client, sessionId, query, callback){
                 }
             }
         }
+	    
         console.log('Success...');
         callback(false, chatfuelPayload);
     })
