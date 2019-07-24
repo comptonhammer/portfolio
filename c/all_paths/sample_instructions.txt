@@ -6,10 +6,6 @@ NEWSTRING
 
 NEWSTRING 
 
-3 -> 
-
-NEWSTRING 
-
 25 -> 70 -> 17 -> 51 -> 15 -> 75 -> 28 -> 
 
 NEWSTRING 
@@ -82,23 +78,11 @@ NEWSTRING
 
 NEWSTRING 
 
-76 -> 23 -> 
-
-NEWSTRING 
-
-18 -> 
-
-NEWSTRING 
-
 6 -> 53 -> 3 -> 49 -> 12 -> 68 -> 28 -> 72 -> 9 -> 56 -> 
 
 NEWSTRING 
 
 36 -> 91 -> 33 -> 99 -> 61 -> 1 -> 
-
-NEWSTRING 
-
-36 -> 79 -> 36 -> 
 
 NEWSTRING 
 
@@ -134,23 +118,11 @@ NEWSTRING
 
 NEWSTRING 
 
-30 -> 
-
-NEWSTRING 
-
 68 -> 16 -> 60 -> 18 -> 67 -> 15 -> 76 -> 34 -> 78 -> 35 -> 
 
 NEWSTRING 
 
 14 -> 63 -> 2 -> 50 -> 14 -> 51 -> 96 -> 37 -> 4 -> 38 -> 
-
-NEWSTRING 
-
-5 -> 52 -> 
-
-NEWSTRING 
-
-7 -> 41 -> 
 
 NEWSTRING 
 
@@ -170,19 +142,7 @@ NEWSTRING
 
 NEWSTRING 
 
-5 -> 56 -> 
-
-NEWSTRING 
-
-29 -> 92 -> 
-
-NEWSTRING 
-
 68 -> 10 -> 49 -> 15 -> 57 -> 22 -> 
-
-NEWSTRING 
-
-1 -> 
 
 NEWSTRING 
 
@@ -194,14 +154,6 @@ NEWSTRING
 
 NEWSTRING 
 
-4 -> 41 -> 
-
-NEWSTRING 
-
-38 -> 1 -> 
-
-NEWSTRING 
-
 68 -> 15 -> 61 -> 5 -> 48 -> 92 -> 27 -> 
 
 NEWSTRING 
@@ -210,15 +162,7 @@ NEWSTRING
 
 NEWSTRING 
 
-17 -> 
-
-NEWSTRING 
-
 1 -> 53 -> 16 -> 76 -> 26 -> 63 -> 9 -> 70 -> 
-
-NEWSTRING 
-
-38 -> 
 
 NEWSTRING 
 
@@ -238,19 +182,7 @@ NEWSTRING
 
 NEWSTRING 
 
-25 -> 
-
-NEWSTRING 
-
 55 -> 16 -> 58 -> 99 -> 31 -> 
-
-NEWSTRING 
-
-55 -> 
-
-NEWSTRING 
-
-55 -> 12 -> 
 
 NEWSTRING 
 
@@ -258,11 +190,7 @@ NEWSTRING
 
 NEWSTRING 
 
-67 -> 9 -> 66 -> 14 -> 
-
-NEWSTRING 
-
-64 -> 11 -> 
+67 -> 9 -> 66 -> 14 ->
 
 NEWSTRING 
 
@@ -274,27 +202,11 @@ NEWSTRING
 
 NEWSTRING 
 
-7 -> 60 -> 
-
-NEWSTRING 
-
-14 -> 
-
-NEWSTRING 
-
 68 -> 14 -> 64 -> 5 -> 
 
 NEWSTRING 
 
-30 -> 68 -> 
-
-NEWSTRING 
-
 62 -> 6 -> 56 -> 7 -> 66 -> 27 -> 94 -> 49 -> 93 -> 31 -> 94 -> 29 -> 61 -> 8 -> 54 -> 
-
-NEWSTRING 
-
-67 -> 25 -> 
 
 NEWSTRING 
 
@@ -318,23 +230,11 @@ NEWSTRING
 
 NEWSTRING 
 
-1 -> 36 -> 
-
-NEWSTRING 
-
-59 -> 12 -> 
-
-NEWSTRING 
-
 37 -> 91 -> 38 -> 80 -> 36 -> 3 -> 63 -> 
 
 NEWSTRING 
 
 56 -> 17 -> 52 -> 8 -> 48 -> 9 -> 64 -> 
-
-NEWSTRING 
-
-32 -> 1 -> 
 
 NEWSTRING 
 
@@ -350,10 +250,6 @@ NEWSTRING
 
 NEWSTRING 
 
-23 -> 71 -> 
-
-NEWSTRING 
-
 30 -> 24 -> 32 -> 40 -> 
 
 NEWSTRING 
@@ -362,15 +258,7 @@ NEWSTRING
 
 NEWSTRING 
 
-19 -> 43 -> 
-
-NEWSTRING 
-
 24 -> 76 -> 23 -> 61 -> 
-
-NEWSTRING 
-
-36 -> 
 
 NEWSTRING 
 
@@ -390,19 +278,7 @@ NEWSTRING
 
 NEWSTRING 
 
-77 -> 15 -> 
-
-NEWSTRING 
-
-46 -> 24 -> 
-
-NEWSTRING 
-
 40 -> 89 -> 43 -> 85 -> 36 -> 
-
-NEWSTRING 
-
-24 -> 51 -> 
 
 NEWSTRING 
 
@@ -414,23 +290,11 @@ NEWSTRING
 
 NEWSTRING 
 
-46 -> 7 -> 
-
-NEWSTRING 
-
-1 -> 62 -> 17 -> 
-
-NEWSTRING 
-
-25 -> 57 -> 
+1 -> 62 -> 17 ->  
 
 NEWSTRING 
 
 25 -> 85 -> 43 -> 3 -> 65 -> 15 -> 
-
-NEWSTRING 
-
-37 -> 46 -> 
 
 NEWSTRING 
 
@@ -442,51 +306,11 @@ NEWSTRING
 
 NEWSTRING 
 
-37 -> 4 -> 
-
-NEWSTRING 
-
-75 -> 14 -> 
-
-NEWSTRING 
-
 23 -> 65 -> 27 -> 
 
 NEWSTRING 
 
-19 -> 79 -> 
-
-NEWSTRING 
-
-30 -> 37 -> 
-
-NEWSTRING 
-
-84 -> 37 -> 
-
-NEWSTRING 
-
-49 -> 
-
-NEWSTRING 
-
 6 -> 59 -> 13 -> 52 -> 
-
-NEWSTRING 
-
-18 -> 
-
-NEWSTRING 
-
-4 -> 35 -> 
-
-NEWSTRING 
-
-62 -> 3 -> 67 -> 
-
-NEWSTRING 
-
-6 -> 46 -> 
 
 NEWSTRING 
 
@@ -495,22 +319,6 @@ NEWSTRING
 NEWSTRING 
 
 49 -> 1 -> 37 -> 92 -> 52 -> 
-
-NEWSTRING 
-
-27 -> 84 -> 
-
-NEWSTRING 
-
-51 -> 7 -> 
-
-NEWSTRING 
-
-70 -> 7 -> 
-
-NEWSTRING 
-
-2 -> 63 -> 1 -> 
 
 NEWSTRING 
 
@@ -562,22 +370,6 @@ NEWSTRING
 
 NEWSTRING 
 
-30 -> 76 -> 
-
-NEWSTRING 
-
-31 -> 
-
-NEWSTRING 
-
-70 -> 9 -> 
-
-NEWSTRING 
-
-77 -> 
-
-NEWSTRING 
-
 30 -> 67 -> 14 -> 
 
 NEWSTRING 
@@ -586,23 +378,7 @@ NEWSTRING
 
 NEWSTRING 
 
-91 -> 33 -> 
-
-NEWSTRING 
-
-4 -> 59 -> 
-
-NEWSTRING 
-
 23 -> 24 -> 25 -> 
-
-NEWSTRING 
-
-18 -> 68 -> 
-
-NEWSTRING 
-
-23 -> 
 
 NEWSTRING 
 
@@ -611,10 +387,6 @@ NEWSTRING
 NEWSTRING 
 
 32 -> 71 -> 13 -> 60 -> 13 -> 
-
-NEWSTRING 
-
-18 -> 
 
 NEWSTRING 
 
@@ -630,15 +402,7 @@ NEWSTRING
 
 NEWSTRING 
 
-4 -> 68 -> 9 -> 
-
-NEWSTRING 
-
 19 -> 32 -> 32 -> 36 -> 48 -> 11 -> 14 -> 17 -> 25 -> 25 -> 36 -> 62 -> 91 -> 6 -> 25 -> 2 -> 6 -> 9 -> 
-
-NEWSTRING 
-
-12 -> 50 -> 
 
 NEWSTRING 
 
@@ -646,35 +410,7 @@ NEWSTRING
 
 NEWSTRING 
 
-41 -> 84 -> 
-
-NEWSTRING 
-
-41 -> 46 -> 
-
-NEWSTRING 
-
-55 -> 91 -> 
-
-NEWSTRING 
-
-11 -> 12 -> 
-
-NEWSTRING 
-
-24 -> 91 -> 
-
-NEWSTRING 
-
-1 -> 47 -> 
-
-NEWSTRING 
-
 4 -> 4 -> 6 -> 11 -> 11 -> 
-
-NEWSTRING 
-
-13 -> 62 -> 
 
 NEWSTRING 
 
@@ -682,11 +418,5 @@ NEWSTRING
 
 NEWSTRING 
 
-41 -> 2 -> 
-
-NEWSTRING 
-
 50 -> 1 -> 1 -> 1 -> 2 -> 3 -> 8 -> 8 -> 9 -> 13 -> 
-
-NEWSTRING 
 
