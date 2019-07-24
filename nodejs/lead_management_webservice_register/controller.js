@@ -47,8 +47,10 @@ function register(req, res){
     }
 
     repo.registerAccount(user, (err, session) => {
-        if(err) return res.redirect(`/register?message=${err.msg}`);
-        else return res.redirect(`/register/verify?session=${session}`);
+        if(err) 
+            return res.redirect(`/register?message=${err.msg}`);
+        else 
+            return res.redirect(`/register/verify?session=${session}`);
     })
 }
 
@@ -91,27 +93,28 @@ function changePassword(req, res){
 
     if(password != password_confirm) 
         return res.redirect('/reset/' + key + '?msg=Password mismatch');
-    else repo.verifyResetCode(key, (err, isMatch) => {
-        if(err) 
-            return res.render('forgot_password', {
-                message:{
-                    error: true, 
-                    message: err.msg || err 
-                }
-            });
-        if(!isMatch) 
-            return res.redirect('back');
-        repo.resetPassword(key, password, (err) => {
+    else 
+        repo.verifyResetCode(key, (err, isMatch) => {
             if(err) 
-                return res.redirect('/reset/' + key);
-            return res.render('login', {
-                message:{
-                    success:true, 
-                    message:'/?msg=Success! Password reset.'
-                }
-            });
+                return res.render('forgot_password', {
+                    message:{
+                        error: true, 
+                        message: err.msg || err 
+                    }
+                });
+            if(!isMatch) 
+                return res.redirect('back');
+            repo.resetPassword(key, password, (err) => {
+                if(err) 
+                    return res.redirect('/reset/' + key);
+                return res.render('login', {
+                    message:{
+                        success:true, 
+                        message:'/?msg=Success! Password reset.'
+                    }
+                });
+            })
         })
-    }) 
 }
 
 module.exports = {
