@@ -1,3 +1,6 @@
+//Excerpt from a Node.js MVC webapp. This part handles registration and password reset
+// By Alec Moore
+
 module.exports = function(app){
     const controller = require('./controller');
     const limiter = require('../../middleware/limiter');
