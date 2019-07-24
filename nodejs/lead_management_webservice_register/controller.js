@@ -1,3 +1,6 @@
+//Excerpt from a Node.js MVC webapp. This part handles registration and password reset
+// By Alec Moore
+
 const repo = require('./repository');
 
 function registerPage(req, res){
@@ -8,7 +11,7 @@ function verificationCodePage(req, res){
     const secret = req.query.session;
     const message = req.query.message || '';
     if(!secret) 
-        return res.status(400).end();
+        return res.redirect('/404');
     return res.render('register_verify', {secret, message});
 }
 
