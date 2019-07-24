@@ -75,9 +75,9 @@ int main(int argc, char* argv[]){
   while (cinfo.output_scanline < cinfo.output_height) {
     jpeg_read_scanlines(&cinfo, buffer, 1);
     for(long i = 0; i < row_stride; i += 3){
-        bw[j] = buffer[0][i];
-        bw[j + 1] = buffer[0][i + 1];
-        bw[j + 2] = buffer[0][i + 2];
+        ogSample[j] = buffer[0][i];
+        ogSample[j + 1] = buffer[0][i + 1];
+        ogSample[j + 2] = buffer[0][i + 2];
         j += 3;
     }
   }
