@@ -1,4 +1,3 @@
-//@ts-check
 const robinRepo = require('../robins/repository');
 const User = require('../../models/users');
 const bcrypt = require('bcrypt');
@@ -8,14 +7,16 @@ function registerAccount(accountInfo, callback){
     if(accountInfo.password != accountInfo.password_confirm) 
         return callback({err: true, msg:'Passwords don\'t match'});
     isValidUsername(accountInfo.desired_username, (err, isValid) => {
-        if(err) return callback(err);
-        if(!isValid) return callback({err: true, msg:'Username taken'});
+        if(err) 
+            return callback(err);
+        if(!isValid) 
+            return callback({err: true, msg:'Username taken'});
         createAccount(accountInfo, callback);
     })
 }
 
 function isValidUsername(username, callback){
-    let notValidMsg = {err:true, msg:'Contains an invalid character:'};
+    let notValidMsg = 'Username contains invalid character:';
     let naughtyLads = [
         '/',
         '\\',
@@ -49,27 +50,32 @@ function isValidUsername(username, callback){
             return callback(notValidMsg + ' ' + naughtyLads[i], false);
     }
     for(let i = 0; i < username.length; i++)
-        if(username.charCodeAt(i) < 123 && username.charCodeAt(i) > 32) return callback(notValidMsg + username[i], false)
+        if(username.charCodeAt(i) < 123 && username.charCodeAt(i) > 32) 
+            return callback(notValidMsg + ' ' + username[i], false);
     return isUniqueUsername(username, callback);
 }
 
 function isUniqueUsername(username, callback){
     User.findOne({username}, (err, account) => {
-        if(err) return callback(err);
-        else if(!account) return callback(false, true);
-        else return callback(false, false);
+        if(err) 
+            return callback(err);
+        else if(!account) 
+            return callback(false, true);
+        else 
+            return callback(false, false);
     })
 }
 
-//TODO: CLEAN UP
 function createAccount(accountInfo, callback){
     bcrypt.hash(accountInfo.password, 13, (err, hash) => {
-        if(err) return callback({err: true, msg:'Bad password'});
+        if(err) 
+            return callback({err: true, msg:'Bad password'});
         
         let account = new User;
+        let expires = new Date();
         let verificationCode = createVerificationCode();
         let secret = createSecret();
-        let expires = new Date();
+        
         expires.setHours(expires.getHours() + 2);
 
         account.created = new Date();
@@ -84,9 +90,12 @@ function createAccount(accountInfo, callback){
         account.data.organization = accountInfo.organization;
         account.data.timezone = "ALL";
 
-        User.findOne({username:'default'}, (err, defaultAccount) => {
-            if(err) return callback(err);
-            if(!defaultAccount) return callback({err:true, msg:'Cant set defaults...'});
+        User.findOne({username:'default'}, (err, defaultAccount) => { 
+            // Account 'default' contains some of the default values for an account
+            if(err) 
+                return callback(err);
+            if(!defaultAccount) 
+                return callback({err:true, msg:'Cant set defaults...'});
 
             account.data.email_template.title = defaultAccount.data.email_template.title;
             account.data.email_template.body = fillTemplate(defaultAccount.data.email_template.body, accountInfo);
@@ -100,11 +109,13 @@ function createAccount(accountInfo, callback){
             account.data.account.verification.expires = expires;
 
             robinRepo.getNewRobinAccountId((err, newId) => {
-                if(err) return callback(err);
+                if(err) 
+                    return callback(err);
                 
                 account.round_robin_id = newId;
-                account.save((err) => {
-                    if(err) return callback({err: true, msg:'Couldn\'t talk to database right now'});
+                account.save(err => {
+                    if(err) 
+                        return callback({err: true, msg:'Couldn\'t talk to database right now'});
                     emailVerificationCode(accountInfo.email, verificationCode, secret);
                     return callback(false, secret);
                 });
@@ -114,10 +125,14 @@ function createAccount(accountInfo, callback){
 }
 
 function fillTemplate(string, account){
-    while(string.includes('#{NAME}')) string = string.replace('#{NAME}', account.name);
-    while(string.includes('#{FIRST_NAME}')) string = string.replace('#{FIRST_NAME}', account.name.split(' ')[0]);
-    while(string.includes('#{CELL_PHONE}')) string = string.replace('#{CELL_PHONE}', account.cell_phone);
-    while(string.includes('#{EMAIL}')) string = string.replace('#{EMAIL}', account.email);
+    while(string.includes('#{NAME}')) 
+        string = string.replace('#{NAME}', account.name);
+    while(string.includes('#{FIRST_NAME}')) 
+        string = string.replace('#{FIRST_NAME}', account.name.split(' ')[0]);
+    while(string.includes('#{CELL_PHONE}')) 
+        string = string.replace('#{CELL_PHONE}', account.cell_phone);
+    while(string.includes('#{EMAIL}')) 
+        string = string.replace('#{EMAIL}', account.email);
     return string;
 }
 
@@ -138,18 +153,21 @@ function createSecret(){
 }
 
 function emailVerificationCode(email, code, secret){
-    let link = `https://portal.bedrockleadservices.com/register/verify?session=${secret}`
+    let link = `https://REDACTED/register/verify?session=${secret}`
     let body = `Your verification code is: <b>${code}</b>. It is only good for an hour so enter it ASAP! 
         Click <a href="${link}">here</a> if you have lost your page.`;
-    emailer.send(email, body, 'Your Verification Code', 'Bedrock Lead Services', (err) => {
-        if(err) console.log(err);
+    emailer.send(email, body, 'Your Verification Code', 'REDACTED Services', (err) => {
+        if(err) 
+            console.log(err);
     });
 }
 
 function verifyAccount(codeEntered, secret, callback){
     User.findOne({'data.account.verification.secret': secret, 'data.account.active': false}, (err, account) => {
-        if(err) return callback(err);
-        if(!account) return callback({err: true, msg:'Invalid account secret.'});
+        if(err) 
+            return callback(err);
+        if(!account) 
+            return callback({err: true, msg:'Invalid account secret.'});
         if(codeEntered == account.data.account.verification.code){
             let isntExpired = notExpired(account.data.account.verification.expires);
             if(isntExpired){
@@ -165,7 +183,8 @@ function verifyAccount(codeEntered, secret, callback){
                 account.data.account.verification.secret = newSecret;
                 account.data.account.verification.expires = expires;
                 account.save((err) => {
-                    if(err) return callback(err);
+                    if(err) 
+                        return callback(err);
                     emailVerificationCode(account.data.email, verificationCode, newSecret);
                     return callback({err: true, msg:'Code expired. Resending...'});
                 })
@@ -178,8 +197,10 @@ function verifyAccount(codeEntered, secret, callback){
 
 function sendResetCode(username, callback){
     User.findOne({username}, (err, account) => {
-        if(err) return callback(err);
-        if(!account) return callback({err: true, msg:'No account with that username.'});
+        if(err) 
+            return callback(err);
+        if(!account) 
+            return callback({err: true, msg:'No account with that username.'});
 
         let verificationCode = createSecret();
         let expires = new Date();
@@ -188,7 +209,9 @@ function sendResetCode(username, callback){
         account.data.account.verification.code = verificationCode;
         account.data.account.verification.expires = expires;
         account.save((err) => {
-            if(err) return callback(err);
+            if(err) 
+                return callback(err);
+            
             emailPasswordResetCode(account.data.email, verificationCode);
             return callback(false, verificationCode);
         })
@@ -197,25 +220,29 @@ function sendResetCode(username, callback){
 }
 
 function emailPasswordResetCode(email, code){
-    let link = `https://portal.bedrockleadservices.com/reset/${code}`;
+    let link = `https://REDACTED/reset/${code}`;
     let body = `Here is your password reset link: <a href="${link}">${link}</a>. It is only good for an hour so enter it ASAP!.
     If you did not request this link, please ignore this email and your password will remain unchanged.`;
-    emailer.send(email, body, 'Your Reset Link', 'Bedrock Lead Services', (err) => {
+    emailer.send(email, body, 'Your Reset Link', 'REDACTED Services', err => {
         if(err) console.log(err);
     });
 }
 
 function verifyResetCode(codeEntered, callback){
     User.findOne({'data.account.verification.code':codeEntered}, (err, account) => {
-        if(err) return callback(err);
-        if(!account) return callback({err:true,msg:'No account'});
+        if(err) 
+            return callback(err);
+        if(!account) 
+            return callback({err:true, msg:'No account'});
 
-        let isntExpired = notExpired(account.data.account.verification.expires);
+        const isntExpired = notExpired(account.data.account.verification.expires);
         if(codeEntered === account.data.account.verification.code && isntExpired){
             return callback(false, true);
         }
-        else if(!isntExpired) return callback({err:true,msg:'Token expired.'});
-        else return callback({err:true, msg:'Codes do not match.'});
+        else if(!isntExpired) 
+            return callback({err:true,msg:'Token expired.'});
+        else 
+            return callback({err:true, msg:'Codes do not match.'});
     })
 }
 
@@ -225,10 +252,13 @@ function notExpired(date){
 
 function resetPassword(key, newPassword, callback){
     bcrypt.hash(newPassword, 13, (err, hash) => {
-        if(err) return callback(err);
+        if(err) 
+            return callback(err);
         User.findOne({'data.account.verification.code':key}, (err, account) => {
-            if(err) return callback(err);
-            if(!account) return callback({err:true, msg:'No account'});
+            if(err) 
+                return callback(err);
+            if(!account) 
+                return callback({err:true, msg:'No account'});
             account.hash = hash;
             account.save(callback);
         })
