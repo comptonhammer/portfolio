@@ -115,7 +115,7 @@ int main(int argc, char* argv[]){
   HOOK * hooks = getHooks(number_of_hooks, circle_height, circle_width);
   
   // Path simply contains an ordered list of the hook number visited.
-  unsigned char * path = getBestPath(qdbSample, hooks, circle_height, circle_width);
+  unsigned int * path = getBestPath(qdbSample, hooks, circle_height, circle_width);
   
   writePath("instructions.txt", path, TERMINATING_CHAR);
   pathToImagePreview("preview.jpeg", path, hooks, circle_height, circle_width, TERMINATING_CHAR);
