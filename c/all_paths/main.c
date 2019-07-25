@@ -15,6 +15,7 @@
 #include "monochrome.h"
 #include "circle.h"
 #include "path_finding.h"
+#include "hook.h"
 
 struct my_error_mgr {
   struct jpeg_error_mgr pub;
