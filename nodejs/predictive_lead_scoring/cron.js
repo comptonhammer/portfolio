@@ -1,3 +1,4 @@
+//Simply renews subscriptions
 const User = require('../models/users/users');
 const logger = require('../common/logger');
 const schedule = require('node-schedule');
@@ -8,15 +9,15 @@ if(process.env.NODE_ENV === 'development')
     processEvery = '0 */3 * * *';
 
 schedule.scheduleJob(processEvery, () => {
-    const todaysDate = new Date();
-    const todaysDateStr = todaysDate.toDateString();
-    logger.log('cron', 'Running renewal check. Todays date is:', todaysDateStr);
+    let todaysDate = new Date();
+    todaysDate.setHours(0, 0, 0, 0);
+    logger.log('cron', 'Running renewal check. Todays date is:', todaysDate.toDateString());
 
-    checkRenewalDates(todaysDateStr, todaysDate);
+    checkRenewalDates(todaysDate);
 })
 
-function checkRenewalDates(todaysDateStr, todaysDate){
-    User.find({'subscription.renewal':todaysDateStr, 'account.standing':true}, (err, accounts) =>{
+function checkRenewalDates(todaysDate){
+    User.find({'subscription.renewal':todaysDate, 'account.standing':true}, (err, accounts) =>{
         if(err) 
             console.log('Error checking renewal dates in mongoose!');
         else 
@@ -37,11 +38,12 @@ function checkRenewalDates(todaysDateStr, todaysDate){
                             }
                         });
                 else{
-                    const nextDate = new Date(todaysDate.setDate(todaysDate.getDate()+30));
-                    const nextDateStr = nextDate.toDateString();
+                    let nextDate = new Date(todaysDate.setDate(todaysDate.getDate() + 30));
+                    nextDate.setHours(0, 0, 0, 0);
+                    
                     const changes = {
                         'account.pulls': 0, 
-                        'subscription.renewal': nextDateStr
+                        'subscription.renewal': nextDate
                     };
 
                     User.findOneAndUpdate({username:account.username}, changes, err =>{
@@ -49,7 +51,7 @@ function checkRenewalDates(todaysDateStr, todaysDate){
                             logger.log('cron', `Error updating pulls of ${account.username}, more info=> ${err}`);
                         }
                         else{ 
-                            logger.log('cron', `Successfully updated pulls of ${account.username}. Next renewal: ${nextDateStr}`);
+                            logger.log('cron', `Successfully updated pulls of ${account.username}. Next renewal: ${nextDate.toDateString()}`);
                         }
                     });
                 }
