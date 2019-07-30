@@ -92,12 +92,12 @@ int main(int argc, char* argv[]){
     : ((int)(cinfo.output_width/2)) * 2;
   long circle_width = circle_height; // Maintain a square ratio
   
-  int number_of_colors = (argc > 3 && argv[3] > 0)
-    ? argv[3]
+  int number_of_colors = (argc > 3 && argv[2] > 0)
+    ? strtol(argv[2], NULL, 10)
     : 4;
   
-  int number_of_hooks = (argc > 4 && argv[4] > 40) // 40 is arbitrary... in testing, everything below will not turn out well
-    ? argv[4]
+  int number_of_hooks = (argc > 4 && strtol(argv[3], NULL, 10) > 40) // 40 is arbitrary... in testing, everything below will not turn out well
+    ? strtol(argv[3], NULL, 10)
     : 80;
 
   JSAMPLE * bwSample = NULL;
