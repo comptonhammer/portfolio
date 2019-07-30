@@ -1,4 +1,3 @@
-//@ts-check
 const User = require('../models/users/users');
 const logger = require('../common/logger');
 const schedule = require('node-schedule');
@@ -41,7 +40,7 @@ function checkRenewalDates(todaysDateStr, todaysDate){
                     const nextDate = new Date(todaysDate.setDate(todaysDate.getDate()+30));
                     const nextDateStr = nextDate.toDateString();
                     const changes = {
-                        'account.pulls':0, 
+                        'account.pulls': 0, 
                         'subscription.renewal': nextDateStr
                     };
 
