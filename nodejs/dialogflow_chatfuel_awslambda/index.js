@@ -53,8 +53,8 @@ exports.handler = async (event) => {
                 return 'Chatfuel ERROR: Corrupt JSON file';
             }
         }
-		else 
-			return (err ? `Chatfuel ERROR: ${err}` : `That account doesn't exist`);
+	else 
+		return (err ? `Chatfuel ERROR: ${err}` : `That account doesn't exist`);
     })
 }
 
@@ -82,8 +82,7 @@ function sendQuery(projectId, key, client, sessionId, query, callback){
     promise.then(responses => {
         let chatfuelPayload = {};
 	    
-        for(let i = 0; responses[0].queryResult.fulfillmentMessages[i]; i++){
-		
+        for(let i = 0; responses[0].queryResult.fulfillmentMessages[i]; i++){	
             let fulfillmentMsg = responses[0].queryResult.fulfillmentMessages[i];
 		
             if(fulfillmentMsg.platform == "PLATFORM_UNSPECIFIED"){
