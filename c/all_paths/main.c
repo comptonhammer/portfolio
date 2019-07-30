@@ -92,7 +92,7 @@ int main(int argc, char* argv[]){
     : ((int)(cinfo.output_width/2)) * 2;
   long circle_width = circle_height; // Maintain a square ratio
   
-  int number_of_colors = (argc > 3 && argv[2] > 0)
+  int number_of_colors = (argc > 3 && strtol(argv[2], NULL, 10) > 0)
     ? strtol(argv[2], NULL, 10)
     : 4;
   
