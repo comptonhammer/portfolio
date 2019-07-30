@@ -1,4 +1,3 @@
-//@ts-check
 const azure = require('../common/azure');
 const logger = require('../common/logger');
 const fs = require('file-system');
