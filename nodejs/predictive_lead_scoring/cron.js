@@ -4,9 +4,9 @@ const logger = require('../common/logger');
 const schedule = require('node-schedule');
 
 
-let processEvery = '*/3 * * * *';
+let processEvery = '*/3 * * * *'; // 3 Hours
 if(process.env.NODE_ENV === 'development')
-    processEvery = '0 */3 * * *';
+    processEvery = '0 */3 * * *'; // 3 Minutes (for testing)
 
 schedule.scheduleJob(processEvery, () => {
     let todaysDate = new Date();
