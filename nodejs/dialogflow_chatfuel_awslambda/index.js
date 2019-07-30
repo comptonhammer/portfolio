@@ -1,4 +1,4 @@
-// Snippet of code for FB messenger bots that allows Dialogflow API and Chatfuel API to communicate together in the same language. Hosted on AWS Lambda.
+// Snippet of code for FB messenger bots that allows Dialogflow API and Chatfuel API to communicate together in the same language. For hosting on AWS Lambda.
 // Written June 2019
 // By Alec
 
@@ -21,8 +21,9 @@ exports.handler = async (event) => {
             console.log(`Chatfuel request recieved for ${project}`);
             doc.uses += 1;
             doc.save((err) => {
-                if(err) 
-                    console.log(err);
+                if(err){ 
+                    console.log('Failed to update: ', err);
+		}
                 else 
                     console.log('DB Updated');
             })
