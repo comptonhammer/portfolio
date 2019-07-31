@@ -30,7 +30,7 @@ function listHistoryWithDates(prefix, callback){
 
             let filesDates = [];
             for(let i = 0; i < files.length; i++){
-                let _x = files[i].replace(prefix,'');
+                let _x = files[i].replace(prefix, '');
                 let y = _x.split("-")[0];
                 let m = _x.split("-")[1];
                 let d = _x.split("-")[2];
