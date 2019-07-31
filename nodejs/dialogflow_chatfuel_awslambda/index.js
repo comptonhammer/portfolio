@@ -20,7 +20,7 @@ exports.handler = async (event) => {
         if(!err && doc){
             console.log(`Chatfuel request recieved for ${project}`);
             doc.uses += 1;
-            doc.save((err) => {
+            doc.save(err => {
                 if(err){ 
                     console.log('Failed to update: ', err);
 		}
@@ -89,10 +89,10 @@ function sendQuery(projectId, key, client, sessionId, query, callback){
                 switch(fulfillmentMsg.message){
                     case "text":
                         handleChatfuelText(chatfuelPayload, fulfillmentMsg);
-                        break;
+                    break;
                     case "payload":
                         handleChatfuelPayload(chatfuelPayload, fulfillmentMsg);
-                        break;
+                    break;
                 }
             }
         }
