@@ -13,7 +13,7 @@ function getFromAzure(filename, callback){
         return callback(result);
       else{
         logger.log('azure', `Error getting file, more info=> ${error}`);
-        return callback(false);
+        return callback();
       }
     });
 }
