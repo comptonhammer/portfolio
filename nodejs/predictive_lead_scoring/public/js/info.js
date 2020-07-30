@@ -1,16 +1,19 @@
 window.onload = function() {
-    var type = $('#type').attr('value');
-    var fullName = $('#name').attr('value');
-    var fName = fullName.split(' ')[0];
-    var lName = fullName.split(' ')[1];
-    var address = $('#address').attr('value');
-    var phone = $('#phone').attr('value');
-    var city = $('#city').attr('value');
-    var state = $('#state').attr('value');
-    var zip = $('#zip').attr('value');
+    let type = $('#type').attr('value');
+    let fullName = $('#name').attr('value');
+    let fName = fullName.split(' ')[0];
+    let lName = fullName.split(' ')[1];
+    let address = $('#address').attr('value');
+    let phone = $('#phone').attr('value');
+    let city = $('#city').attr('value');
+    let state = $('#state').attr('value');
+    let zip = $('#zip').attr('value');
 
+    const query = `fName=${fName}&lName=${lName}&address=${address}&phone=${phone}&city=${city}&state=${state}&zip=${zip}`;
+    
     if(type == 'all'){
-        $.post(`/lead/juju/ext-data?fName=${fName}&lName=${lName}&address=${address}&phone=${phone}&city=${city}&state=${state}&zip=${zip}`,(i) =>{
+        const url = `/lead/juju/ext-data?${query}`;
+        $.post(url, i =>{
             if(i.err){
                 errorHandler(i);
             }
@@ -19,28 +22,30 @@ window.onload = function() {
 
                 if (magHundred >= 100){
                     magHundred -= 100;
-                    document.getElementById('magDet').innerHTML = parseFloat(magHundred).toFixed(2)+'% ABOVE';
-                    document.getElementById('magPercPos').style.width = '' + Math.abs(parseFloat(magHundred).toFixed(2)) + '%';
-                    document.getElementById('magPercPosText').innerHTML = '' + Math.abs(parseFloat(magHundred).toFixed(2))+'%';
+                    document.
+                    
+                    ElementById('mag-det').innerHTML = parseFloat(magHundred).toFixed(2)+'% ABOVE';
+                    document.getElementById('mag-perc-pos').style.width = '' + Math.abs(parseFloat(magHundred).toFixed(2)) + '%';
+                    document.getElementById('mag-perc-pos-text').innerHTML = '' + Math.abs(parseFloat(magHundred).toFixed(2))+'%';
                 }
                 else if (magHundred < 100){
                     magHundred -= 100;
-                    document.getElementById('magDet').innerHTML = Math.abs(parseFloat(magHundred).toFixed(2))+'% BELOW';
-                    document.getElementById('magPercNeg').style.width = Math.abs(parseFloat(magHundred).toFixed(2))+'%';
-                    document.getElementById('magPercNegText').innerHTML = parseFloat(magHundred).toFixed(2)+'%';
+                    document.getElementById('mag-det').innerHTML = Math.abs(parseFloat(magHundred).toFixed(2))+'% BELOW';
+                    document.getElementById('mag-perc-neg').style.width = Math.abs(parseFloat(magHundred).toFixed(2))+'%';
+                    document.getElementById('mag-perc-neg-text').innerHTML = parseFloat(magHundred).toFixed(2)+'%';
                 }
                 else if(i == 'noMatch'){
-                    document.getElementById('statusDiv').style.display = 'none';
-                    document.getElementById('errorOccured').style.display = 'table';
+                    document.getElementById('status-div').style.display = 'none';
+                    document.getElementById('error-occured').style.display = 'table';
                 }
 
                 leadHundred = i.leadPercent * 100;
-                document.getElementById('leadPerc').style.width = '' + Math.abs(parseFloat(leadHundred).toFixed(2))+'%';
-                document.getElementById('leadPerc').innerHTML = '' + Math.abs(parseFloat(leadHundred).toFixed(2))+'%';
-                document.getElementById('leadDet').innerHTML = Math.abs(parseFloat(leadHundred).toFixed(2))+'%';
-                document.getElementById('fullBody').style.display = '';
-                document.getElementById('statusDiv').style.display = 'none';
-                document.getElementById('cherries').innerHTML = getCherries(i.leadPercent,magHundred/100);
+                document.getElementById('lead-perc').style.width = '' + Math.abs(parseFloat(leadHundred).toFixed(2))+'%';
+                document.getElementById('lead-perc').innerHTML = '' + Math.abs(parseFloat(leadHundred).toFixed(2))+'%';
+                document.getElementById('lead-det').innerHTML = Math.abs(parseFloat(leadHundred).toFixed(2))+'%';
+                document.getElementById('full-body').style.display = '';
+                document.getElementById('status-div').style.display = 'none';
+                document.getElementById('cherries').innerHTML = getRating(i.leadPercent, magHundred/100);
                 let mv = i.marketValue;
                 if (mv == 0) mv = 'Not Available';
                 i.mv = mv;
@@ -59,7 +64,8 @@ window.onload = function() {
         })
     }
     else if(type == 'onlyJuju'){
-        $.post(`/lead/juju?fName=${fName}&lName=${lName}&address=${address}&phone=${phone}&city=${city}&state=${state}&zip=${zip}`,(i) =>{
+        const url = `/lead/juju?${query}`;
+        $.post(url ,(i) =>{
             if(i.err){
                 errorHandler(i);
             }
@@ -68,28 +74,28 @@ window.onload = function() {
 
                 if (magHundred >= 100){
                     magHundred -= 100;
-                    document.getElementById('magDet').innerHTML = parseFloat(magHundred).toFixed(2)+'% ABOVE';
-                    document.getElementById('magPercPos').style.width = '' + Math.abs(parseFloat(magHundred).toFixed(2)) + '%';
-                    document.getElementById('magPercPosText').innerHTML = '' + Math.abs(parseFloat(magHundred).toFixed(2))+'%';
+                    document.getElementById('mag-det').innerHTML = parseFloat(magHundred).toFixed(2)+'% ABOVE';
+                    document.getElementById('mag-perc-pos').style.width = '' + Math.abs(parseFloat(magHundred).toFixed(2)) + '%';
+                    document.getElementById('mag-perc-pos-text').innerHTML = '' + Math.abs(parseFloat(magHundred).toFixed(2))+'%';
                 }
                 else if (magHundred < 100){
                     magHundred -= 100;
-                    document.getElementById('magDet').innerHTML = Math.abs(parseFloat(magHundred).toFixed(2))+'% BELOW';
-                    document.getElementById('magPercNeg').style.width = Math.abs(parseFloat(magHundred).toFixed(2))+'%';
-                    document.getElementById('magPercNegText').innerHTML = parseFloat(magHundred).toFixed(2)+'%';
+                    document.getElementById('mag-det').innerHTML = Math.abs(parseFloat(magHundred).toFixed(2))+'% BELOW';
+                    document.getElementById('mag-perc-neg').style.width = Math.abs(parseFloat(magHundred).toFixed(2))+'%';
+                    document.getElementById('mag-perc-neg-text').innerHTML = parseFloat(magHundred).toFixed(2)+'%';
                 }
                 else if(i == 'noMatch'){
-                    document.getElementById('statusDiv').style.display = 'none';
-                    document.getElementById('errorOccured').style.display = 'table';
+                    document.getElementById('status-div').style.display = 'none';
+                    document.getElementById('error-occured').style.display = 'table';
                 }
 
                 leadHundred = i.leadPercent * 100;
-                document.getElementById('leadPerc').style.width = '' + Math.abs(parseFloat(leadHundred).toFixed(2))+'%';
-                document.getElementById('leadPerc').innerHTML = '' + Math.abs(parseFloat(leadHundred).toFixed(2))+'%';
-                document.getElementById('leadDet').innerHTML = Math.abs(parseFloat(leadHundred).toFixed(2))+'%';
-                document.getElementById('fullBody').style.display = '';
-                document.getElementById('statusDiv').style.display = 'none';
-                document.getElementById('cherries').innerHTML = getCherries(i.leadPercent,magHundred/100);
+                document.getElementById('lead-perc').style.width = '' + Math.abs(parseFloat(leadHundred).toFixed(2))+'%';
+                document.getElementById('lead-perc').innerHTML = '' + Math.abs(parseFloat(leadHundred).toFixed(2))+'%';
+                document.getElementById('lead-det').innerHTML = Math.abs(parseFloat(leadHundred).toFixed(2))+'%';
+                document.getElementById('full-body').style.display = '';
+                document.getElementById('status-div').style.display = 'none';
+                document.getElementById('cherries').innerHTML = getCherries(i.leadPercent, magHundred/100);
                 let mv = i.marketValue;
                 if (mv == 0) mv = 'Not Available';
 
@@ -100,14 +106,14 @@ window.onload = function() {
         })
     }
     else if(type =='extendedData'){
-        $.post(`/lead/ext-data?fName=${fName}&lName=${lName}&address=${address}&phone=${phone}&city=${city}&state=${state}&zip=${zip}`,(i) =>{
-            console.log(i);
+        const url = `/lead/ext-data?${query}`;
+        $.post(url, i =>{
             if(i.err){
                 errorHandler(i);
             }
             else{
-                document.getElementById('fullBody').style.display = '';
-                document.getElementById('statusDiv').style.display = 'none';
+                document.getElementById('full-body').style.display = '';
+                document.getElementById('status-div').style.display = 'none';
                 let mv = i.marketValue;
                 if (mv == 0) mv = 'Not Available';
                 i.mv = mv;
@@ -144,48 +150,52 @@ function displayDataHandler(i){
 
 function errorHandler(i){
     if(i.errMsg == 'err'){
-        document.getElementById('statusDiv').style.display = 'none';
-        document.getElementById('errorOccured').style.display = 'table';
-        document.getElementById('errorText').innerHTML = 'There was an error with the machine learning code.'
+        document.getElementById('status-div').style.display = 'none';
+        document.getElementById('error-occured').style.display = 'table';
+        document.getElementById('error-text').innerHTML = 'There was an error with the machine learning code.'
     }
     else if(i.errMsg == 'throttled'){
-        document.getElementById('statusDiv').style.display = 'none';
-        document.getElementById('throttleLimitReached').style.display = 'table';
+        document.getElementById('status-div').style.display = 'none';
+        document.getElementById('throttle-limit-reached').style.display = 'table';
     }
     else if(i.errMsg == 'accountNA'){
-        document.getElementById('statusDiv').style.display = 'none';
-        document.getElementById('errorAccount').style.display = 'table';
+        document.getElementById('status-div').style.display = 'none';
+        document.getElementById('error-account').style.display = 'table';
     }
     else if(i.errMsg == 'invalidDate'){
-        document.getElementById('statusDiv').style.display = 'none';
-        document.getElementById('invalidDate').style.display = 'table';
+        document.getElementById('status-div').style.display = 'none';
+        document.getElementById('invalid-date').style.display = 'table';
     }
     else if(i.errMsg == 'noMatch'){
-        document.getElementById('statusDiv').style.display = 'none';
-        document.getElementById('errorOccured').style.display = 'table';
+        document.getElementById('status-div').style.display = 'none';
+        document.getElementById('error-occured').style.display = 'table';
     }
     else{
-        document.getElementById('statusDiv').style.display = 'none';
-        document.getElementById('errorOccured').style.display = 'table';
-        document.getElementById('errorText').innerHTML = i.errMsg;
+        document.getElementById('status-div').style.display = 'none';
+        document.getElementById('error-occured').style.display = 'table';
+        document.getElementById('error-text').innerHTML = i.errMsg;
     }
 }
 
-$(function () {
-    $("#backBtn").click(function (e) {
+$(() => {
+    $("#back-btn").click(e => {
         e.preventDefault();
         window.location.replace('/home');
         document.getElementById('list').style.backgroundColor = "red";
         return false;
     });
 
-    $("#downloadLead").click(function (e) {
+    $("#download-lead").click(e => { //creates and downloads a spreadsheet
         e.preventDefault();
-        var fullName = $('#name').attr('value').replace(' ', '');
-        var text = document.getElementById("output").value;
-        text = text.replace(/\n/g, "\r\n"); // To retain \n
-        var blob = new Blob([text], { type: "text/csv"});
-        var anchor = document.createElement("a");
+        
+        const fullName = $('#name').attr('value').replace(' ', '');
+        let text = document.getElementById("output").value;
+        
+        text = text.replace(/\n/g, "\r\n"); // To retain \n newline
+        
+        let blob = new Blob([text], { type: "text/csv"});
+        let anchor = document.createElement("a");
+        
         anchor.download = `LeadJuJu-${fullName}.csv`;
         anchor.href = window.URL.createObjectURL(blob);
         anchor.target ="_blank";
@@ -196,14 +206,13 @@ $(function () {
     });
 });
 
-function getCherries(leadScore, magnitude){
-    var newString = '';
-    var weight = .85;
-    var tenth = weight/10;
+function getRating(leadScore, magnitude){
+    let newString = '';
+    const weight = .85;
+    const tenth = weight / 10;
 
-    var weighted = (magnitude*weight);
-
-    var rating = ((leadScore * 2) + weighted) / 2;
+    const weighted = magnitude * weight;
+    const rating = ((leadScore * 2) + weighted) / 2;
 
     if(rating >= 1.0){ 
         newString = '🔮🔮🔮🔮🔮';
