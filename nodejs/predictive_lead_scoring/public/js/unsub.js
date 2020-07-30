@@ -7,14 +7,14 @@ $('#iForm').submit(function(e){
 });
 
 function unsub(){
-    const formData = $('#iForm').serialize();
+    const formData = $('#i-form').serialize();
     $.post('/unsubscribe', formData, data => {
-        if (data != false && data.active == true) 
+        if (data && data.active) 
             window.location.replace(data.url);
-        else if(data.active == false){
+        else if(!data.active){
             document.getElementById("errorDef").innerHTML = "Hmm, looks like that subscription is already inactive/cancelled. <a href='https://leadjuju.com/support'>Contact us</a> if you're having any problems."
         }
-        else if(data.err == true){
+        else if(data.err){
             document.getElementById("errorDef").innerHTML = data.errMsg;
         }
         else {
