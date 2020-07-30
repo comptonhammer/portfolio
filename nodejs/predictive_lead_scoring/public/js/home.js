@@ -11,19 +11,19 @@ $(function () {
         })
     });
 
-    $("#includeScoresChk").click(function (e) {
-      if($('#includeScores').attr('value') == "true") 
-        $('#includeScores').attr('value', "false");
-      else if($('#includeScores').attr('value') == "false") 
-        $('#includeScores').attr('value', "true");
-      console.log($('#includeScores').attr('value'));
+    $("#include-scores-chk").click(function (e) {
+      if($('#include-scores').attr('value') == "true") 
+        $('#include-scores').attr('value', "false");
+      else if($('#include-scores').attr('value') == "false") 
+        $('#include-scores').attr('value', "true");
+      console.log($('#include-scores').attr('value'));
     });
 
     $("#demo-only-chk").click(function (e) {
-      if($('#demoOnly').attr('value') == "true") 
-        $('#demoOnly').attr('value', "false");
-      else if($('#demoOnly').attr('value') == "false") 
-        $('#demoOnly').attr('value', "true");
+      if($('#demo-only').attr('value') == "true") 
+        $('#demo-only').attr('value', "false");
+      else if($('#demo-only').attr('value') == "false") 
+        $('#demo-only').attr('value', "true");
     });
 
     $("#settings").click(function (e) {
