@@ -27,7 +27,6 @@ exports.handler = async (event, ctx, cb) => {
         });
         response.on ('end', function () {
             const fixedText = fixErrors(text, JSON.parse(body));
-            console.log(fixedText);
             cb(null, fixedText);
         });
         response.on ('error', function (e) {
