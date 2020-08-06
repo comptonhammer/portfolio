@@ -1,0 +1,37 @@
+html
+  head
+    title #{title} ‹ REDACTED
+    meta(name='description', content='SA')
+    link#favicon(rel='icon', href=`/img/ico.png`, type='image/x-icon')
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='css/bootstrap.css')
+  body(style='background-image:url("/img/ljbg4.jpg");background-color: rgb(248, 247, 238);')
+    br
+    div(class='container')
+      img(src=`/img/logo.png`, style='width: 50%; display:block; padding: 15px; margin: auto;min-height:100px;')
+      form#iForm(class="shadow-sm p-3 mb-5 bg-white rounded" style='opacity: 0.9; width: 75%; display: block; margin: auto;')
+        if !success
+          h1(class="display-4", style="text-align:center;") 
+            b Unsubscribe
+          div(style="text-align:center;") Enter your account info to confirm that you want to unsubscribe:
+          br
+          div(class='form-group')
+            div(class="input-group mb-3 input-group-lg")
+              div(class="input-group-prepend")
+                span(class="input-group-text" ) Username:
+              input#username(name='username', type='text', required, class="form-control")
+          div(class='form-group')
+            div(class="input-group mb-3 input-group-lg" )
+              div(class="input-group-prepend")
+                span(class="input-group-text") Password: 
+              input#password(name='password', type='password', required, class="form-control")
+          #errorDef
+          br
+          button(class="btn btn-danger btn-lg btn-block") Cancel Subscription
+        else
+          h2( style="text-align:center;") 
+            b You've successfully unsubscribed. For any questions contact support@leadjuju.com
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    script(src=`/js/unsub.js`)
