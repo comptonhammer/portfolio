@@ -1,5 +1,5 @@
-#ifndef POLY
-#define POLY
+#ifndef POLYGON_H
+#define POLYGON_H
 
 #include "circle.h"
 #include "buffer.h"
