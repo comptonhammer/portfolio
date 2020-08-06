@@ -1,7 +1,7 @@
 //@ts-check
 module.exports = function(app) {
-    let ensureAuthenticated = require('../middleware/ensure_authenticated');
-    let bruteforce = require('../middleware/bruteforce');
+    const ensureAuthenticated = require('../middleware/ensure_authenticated');
+    const bruteforce = require('../middleware/bruteforce');
     const controller = require('./controller');
 
     require('./users/router')(app);
@@ -23,10 +23,6 @@ module.exports = function(app) {
 
     app.get('/register', controller.registerPage);
 
-    app.get('/file/download', ensureAuthenticated, controller.sendFileToUser);
-
-    app.get('/file/delete', ensureAuthenticated, controller.deleteFile);
-
     app.get('/history', ensureAuthenticated, controller.historyPage);
 
     app.get('/privacy', controller.privacy);
@@ -34,6 +30,12 @@ module.exports = function(app) {
     app.get('/terms', controller.terms);
 
     app.post('/login', bruteforce.prevent, controller.login);
+    
+    //TODO move these:
+    
+    app.get('/file/download', ensureAuthenticated, controller.sendFileToUser);
+    
+    app.get('/file/delete', ensureAuthenticated, controller.deleteFile);
 
     app.post('/settings/update', ensureAuthenticated, controller.updateSettings);
 };
