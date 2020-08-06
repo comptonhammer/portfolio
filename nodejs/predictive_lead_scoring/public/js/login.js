@@ -1,4 +1,4 @@
-$('#iForm').submit(function(e){
+$('#i-form').submit(function(e){
     e.preventDefault();
     
     const formData = $('#i-form').serialize();
