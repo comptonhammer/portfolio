@@ -14,36 +14,36 @@ html
         li.breadcrumb-item
             a(href='./home') Home
         li.breadcrumb-item.active(aria-current='page') Lead Info
-    div(class='container' id='statusDiv' style='display: table;text-align: center;width:100%;height:100%;')
+    div(class='container' id='status-div' style='display: table;text-align: center;width:100%;height:100%;')
         div(style='display: table-cell;vertical-align: middle;')
             div(class="spinner-grow text-warning" style="width: 6rem; height: 6rem;" role="status")
                 span(class="sr-only") Fetching Data...
             br
             text(id="status", style="padding: 5px;")
-    div(class='container' id='errorOccured' style='display:none; text-align: center;width:100%;height:100%;')
+    div(class='container' id='error-occured' style='display:none; text-align: center;width:100%;height:100%;')
         div(style='display: table-cell;vertical-align: middle;')
             h1 😔
             br
-            text(id='errorText') It looks like I couldn't find any information on that person. It's possible they don't have any public information available, their name has changed, or their address has changed.
+            text(id='error-text') It looks like I couldn't find any information on that person. It's possible they don't have any public information available, their name has changed, or their address has changed.
             br
             br
-    div(class='container' id='invalidDate' style='display:none; text-align: center;width:100%;height:100%;')
+    div(class='container' id='invalid-date' style='display:none; text-align: center;width:100%;height:100%;')
         div(style='display: table-cell;vertical-align: middle;')
             h1 📅
             br
             | I couldn't read the date you entered, please press back and retry.
             br
             br
-    div(class='container' id='errorAccount' style='display:none; text-align: center;width:100%;height:100%;')
+    div(class='container' id='error-account' style='display:none; text-align: center;width:100%;height:100%;')
         div(style='display: table-cell;vertical-align: middle;')
             h1 ⏰
             br
             | Your session timed out! Click 
-            a(href='/leadjuju') here
+            a(href='/') here
             |  to re-login.
             br
             br
-    div(class='container' id='throttleLimitReached' style='display:none; text-align: center;width:100%;height:100%;')
+    div(class='container' id='throttle-limit-reached' style='display:none; text-align: center;width:100%;height:100%;')
         div(style='display: table-cell;vertical-align: middle;')
             h1 ⚠️
             br
@@ -66,16 +66,16 @@ html
         .alert.alert-warning(role='alert')
             h5
                 b Viewing:
-            b(id="name",name="name", value=givenName) #{givenName}
+            b(id="name", name="name", value=givenName) #{givenName}
             br
-            text(id="address",name="address", value=address) #{address}
+            text(id="address", name="address", value=address) #{address}
             br
-            text(id="city",name="city", value=city) #{city}, 
-            text(id="state",name="state", value=state) #{state}
+            text(id="city", name="city", value=city) #{city}, 
+            text(id="state", name="state", value=state) #{state}
             br
-            text(id="zip",name="zip", value=zip) #{zip}
+            text(id="zip", name="zip", value=zip) #{zip}
             br
-            text(id="phone",name="phone", value=phone) #{phone}
+            text(id="phone", name="phone", value=phone) #{phone}
             br
         .container
             if model != 'extendedData'
@@ -87,22 +87,22 @@ html
                 br
                 br
                 div(style='width:50%; float:left;')
-                    .progress(id="magPercNeg", style='width: 0%; float: right; height: 36px;')
-                        .progress-bar.bg-danger(id="magPercNegText" role='progressbar', style='width: 100%; border-right: solid 2px black;', aria-valuenow='100', aria-valuemin='0', aria-valuemax='100')
+                    .progress(id="mag-perc-neg", style='width: 0%; float: right; height: 36px;')
+                        .progress-bar.bg-danger(id="mag-perc-neg-text" role='progressbar', style='width: 100%; border-right: solid 2px black;', aria-valuenow='100', aria-valuemin='0', aria-valuemax='100')
                 div(style='width:50%; float:right; clear: right;')
-                    .progress(id="magPercPos", style='width: 0%; float:left; height: 36px;')
-                        .progress-bar.bg-success(id="magPercPosText" role='progressbar', style='width: 100%; border-left: solid 2px black;', aria-valuenow='0', aria-valuemin='0', aria-valuemax='100')
+                    .progress(id="mag-perc-pos", style='width: 0%; float:left; height: 36px;')
+                        .progress-bar.bg-success(id="mag-perc-pos-text" role='progressbar', style='width: 100%; border-left: solid 2px black;', aria-valuenow='0', aria-valuemin='0', aria-valuemax='100')
                 br
                 br
                 h4 Projected Success of Lead 
                 text
                     | Based on historic records, pursuing this lead has a 
-                    b#leadDet
+                    b#lead-det
                     |  chance of success. Anything above 50% is regarded as GOOD:
                 br
                 br
                 .progress(style='height: 36px;')
-                    .progress-bar.bg-info(id="leadPerc" role='progressbar', style='width: 50%;', aria-valuenow='25', aria-valuemin='0', aria-valuemax='100') 54.87%
+                    .progress-bar.bg-info(id="lead-perc" role='progressbar', style='width: 50%;', aria-valuenow='25', aria-valuemin='0', aria-valuemax='100') 54.87%
                 h4#over Overall:
                 span.badge.badge-pill.badge-dark
                     text#cherries(style='font-size: 32px;') 🔮
@@ -119,54 +119,54 @@ html
                             td#age(name='age')
                         tr
                             th(scope='col') Business Owner:
-                            td#businessOwnerOccupation(name='businessOwnerOccupation')
+                            td#business-owner-occupation(name='businessOwnerOccupation')
                         tr
                             th(scope='col') Occupation: 
                             td#occupation(name='occupation')
                         tr
                             th(scope='col') Employment Status: 
-                            td#employmentStatus(name='employmentStatus')
+                            td#employment-status(name='employmentStatus')
                         tr
                             th(scope='col') Education: 
                             td#education(name='education')
                         tr
                             th(scope='col') Marital Status: 
-                            td#maritalStatus(name='maritalStatus')
+                            td#marital-status(name='maritalStatus')
                         tr
                             th(scope='col') Political Party: 
-                            td#politicalParty(name='politicalParty')
+                            td#political-party(name='politicalParty')
                 br
                 h3 Household Information
                 table.table.table-striped
                     tbody
                         tr
                             th(scope='col') Estimated Household Income Min-Max: 
-                            td#estimatedIncome(name='estimatedIncome')
+                            td#estimated-income(name='estimatedIncome')
                         tr
                             th(scope='col') Length of residence: 
-                            td#lengthOfResidence(name='lengthOfResidence')
+                            td#length-of-residence(name='lengthOfResidence')
                         tr
                             th(scope='col') Owner/Renter: 
-                            td#ownerRenter(name='ownerRenter')
+                            td#owner-renter(name='ownerRenter')
                         tr
                             th(scope='col') Children Present: 
-                            td#childrenPresent(name='childrenPresent')
+                            td#children-present(name='childrenPresent')
                         tr
                             th(scope='col') Home Market Value: 
-                            td#marketValue(name='marketValue')
+                            td#market-value(name='marketValue')
                 br
                 h3 Interests
                 b#interests(name='interests')
                 br
                 br
                 .text-center.btn-group(role='group', style='width:100%;')
-                    button#downloadLead.btn.btn-outline-success.btn-lg(type='button') Save Info
-                    button#backBtn.btn.btn-outline-dark.btn-lg(type='button') Back
+                    button#download-lead.btn.btn-outline-success.btn-lg(type='button') Save Info
+                    button#back-btn.btn.btn-outline-dark.btn-lg(type='button') Back
                 br
         else 
             .text-center.btn-group(role='group', style='width:100%;')
-                button#downloadLead.btn.btn-outline-success.btn-lg(type='button') Save Info
-                button#backBtn.btn.btn-outline-dark.btn-lg(type='button') Back
+                button#download-lead.btn.btn-outline-success.btn-lg(type='button') Save Info
+                button#back-btn.btn.btn-outline-dark.btn-lg(type='button') Back
             br
     include footer.pug
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js')
