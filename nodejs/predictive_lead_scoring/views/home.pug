@@ -1,0 +1,221 @@
+html
+  head
+    title #{title} ‹ REDACTED
+    meta(name='description', content='SA')
+    link#favicon(rel='icon', href=`/img/ico.png`, type='image/x-icon')
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='css/bootstrap.css')
+  body(style='margin-bottom: 60px;background-color: rgb(248, 247, 238);')
+    div(class='container-fluid')
+      nav(class="navbar fixed-top navbar-light" style="background-color: rgb(209, 208, 202);")
+        div(class ="btn-group" role="group")
+          if model != 'extendedData'
+            a(class="btn btn-outline-success", href=`/template?type=juju`, download='template_juju.csv') Download Template
+          else
+            a(class="btn btn-outline-success", href=`/template?type=ext`, download='template_extended_data.csv') Download Template
+          button(class="btn btn-outline-primary" id='history') History
+        div(class="nav-item d-none d-lg-block") 
+          b Account: 
+          span(class="badge badge-secondary", style="background-color: rgb(236, 183, 48);") #{user}
+        div(id='model', class="nav-item  d-none d-lg-block")
+          b Type: 
+          if type == 'all' && model != 'Custom'
+            span(class="badge badge-secondary", style="background-color: rgb(236, 183, 48);") JuJu, #{model}
+          else if type == 'onlyJuju'
+            span(class="badge badge-secondary", style="background-color: rgb(236, 183, 48);") #{model}: Scoring Only
+          else if model == 'Custom'
+            span(class="badge badge-secondary", style="background-color: rgb(236, 183, 48);") Custom Model
+          else
+            span(class="badge badge-secondary", style="background-color: rgb(236, 183, 48);") Extended Data
+        div(id='pulls-left',class="nav-item d-none d-lg-block", style='padding-right: 40px;')
+          b Pulls left this month:  
+          span(class="badge badge-secondary", style="background-color: rgb(236, 183, 48);") #{pullsLeft}
+        div(id='pulls', class="nav-item")
+          b Pulls performed this month: 
+          span(class="badge badge-secondary", style="background-color: rgb(236, 183, 48);") #{pulls}
+        div(class ="btn-group" role="group")
+          button(id='logout', class='btn btn-outline-danger') 
+            b Logout
+          button(id='settings', class='btn btn-outline-secondary') 
+            b Settings
+    br
+    br
+    div(class='title')
+      img(src=`/img/logo.png`,class="img-fluid", style='width: 40%; display: block; padding: 15px; margin: auto;')
+    div(class='container')
+      form(method='get', enctype='multipart/form-data', action='/details')
+        br
+        div(class="shadow-sm p-3 mb-5 bg-white rounded")
+          a(class="btn btn-warning btn-lg btn-block" data-toggle="collapse" href="#singlet-up" role="button" aria-expanded="false" aria-controls="collapseExample") 
+            img(src="/svg/person.svg" style='padding-right: 5px;')
+            | Single Upload
+          div(class="collapse", id="singlet-up")
+            br
+            a(class="btn btn-outline-dark btn-sm" data-toggle="collapse" href="#single-help" role="button" aria-expanded="false" aria-controls="collapseExample") 
+              img(src="/svg/list-ordered.svg" style='padding-right: 5px;')
+              | Show Steps
+            br
+            br
+            div(id="single-help", class="collapse alert alert-secondary")
+              span(class="font-weight-bold") Step 1:
+              br
+              | Enter the information on your lead. If you don't have something like a phone number or an address, you can just enter an arbitrary value.
+              br
+              span(class="font-weight-bold") Step 2: 
+              br
+              | Press 'Get Insights' and watch as LeadJuJu scours the web for information.
+              br
+              span(class="font-weight-bold") Step 3:
+              br
+              | View all of your potential clients available info!
+              br
+            div(class='form-group')
+              div(class="input-group")
+                div(class="input-group-prepend" style="width:10%;")
+                  span(class="input-group-text" style="width:100%;") Name:
+                input#given-name(type='text', name='givenName', placeholder='John Doe', class="form-control" required)
+                div(class="input-group-append")
+                  span(class="input-group-text") 
+                    small (First Last)              
+            div(class='form-group')
+              div(class="input-group")
+                div(class="input-group-prepend" style="width:10%;")
+                  span(class="input-group-text" style="width:100%;") Address: 
+                input#addr(type='text', name='addr', placeholder='63 Keystone Ave', class="form-control" required)
+            div(class='form-group')
+              div(class="input-group")
+                div(class="input-group-prepend" style="width:10%;")
+                  span(class="input-group-text" style="width:100%;") City: 
+                input#city(type='text', name='city', placeholder='Las Vegas', class="form-control" required)  
+            div(class='form-group')
+              div(class="input-group")
+                div(class="input-group-prepend" style="width:10%;")
+                  span(class="input-group-text" style="width:100%;") State: 
+                input#state(type='text', name='state', placeholder='NV', class="form-control" required)
+                div(class="input-group-append")
+                  span(class="input-group-text") 
+                    small Abbreviated
+            div(class='form-group')
+              div(class="input-group")
+                div(class="input-group-prepend" style="width:10%;")
+                  span(class="input-group-text" style="width:100%;") Zip: 
+                input#zip(type='text', name='zip', placeholder='89583', class="form-control" required)
+            div(class='form-group')
+              div(class="input-group")
+                div(class="input-group-prepend" style="width:10%;")
+                  span(class="input-group-text" style="width:100%;") Phone: 
+                input#phone(type='text', name='phone', placeholder='1112223333', class="form-control")
+                div(class="input-group-append")
+                  span(class="input-group-text") 
+                    small (XXXYYYZZZZ)
+            div
+              button(class="btn btn-primary btn-lg btn-block" id='get-scores') Get Insights
+    div(class='container')
+      form(method='post', enctype='multipart/form-data', action='/upload', style='')
+        div(class="shadow-sm p-3 mb-5 bg-white rounded")
+          a(class="btn btn-warning btn-lg btn-block" data-toggle="collapse" href="#quick-up" role="button" aria-expanded="false" aria-controls="collapseExample") 
+            img(src="/svg/package.svg" style='padding-right: 7px;')
+            | Quick Upload
+          div(class="collapse", id="quick-up")
+            br
+            a(class="btn btn-outline-dark btn-sm" data-toggle="collapse" href="#upload-help" role="button" aria-expanded="false" aria-controls="collapseExample") 
+              img(src="/svg/list-ordered.svg" style='padding-right: 5px;')
+              | Show Steps
+            br
+            br
+            div(id="upload-help", class="collapse alert alert-secondary")
+              span(class="font-weight-bold") Step 1:
+              br
+              | Download the template spreadsheet (above, top left) and populate it. If the file doesn't download, try right clicking 'Template' and pressing 'Save link as'.
+              br
+              span(class="font-weight-bold") Step 2: 
+              br
+              | Save your populated spreadsheet as an Excel file (.xlsx) or a CSV file (.csv).
+              br
+              span(class="font-weight-bold") Step 3:
+              br
+              | Press 'Choose File' and find your spreadsheet.
+              br
+              span(class="font-weight-bold") Step 4:
+              br
+              | Upload and recieve a spreadsheet via e-mail with your new lead information.
+              br
+            input(type='hidden', value=sessionID, id='sessionID',name='sessionID')
+            input(type='hidden', value=user, id='username', name='username')
+            div(class='form-group')
+              div(class="input-group" )
+                div(class="input-group-prepend" style="")
+                  span(class="input-group-text" style="") Send to: 
+                input#sendTo(type='text', name='sendTo', class="form-control" value=sendTo)
+            div(class='custom-file')
+              input#file(class="custom-file-input" type='file', name='filename', accept=".csv, .xlsx", required)
+              label(id="file-tag" class="custom-file-label" for="file") Choose file...
+              div(class="invalid-feedback") Invalid File
+            div
+              br
+              button(class="btn btn-primary btn-lg btn-block" id='get-scores-file') Upload and Score
+    if type === 'all'          
+      div(class='container')
+        form(method='post', enctype='multipart/form-data', action='/bullet/decrypt', style='')
+          div(class="shadow-sm p-3 mb-5 bg-white rounded")
+            a(class="btn btn-warning btn-lg btn-block" data-toggle="collapse" href="#decrypt" role="button" aria-expanded="false" aria-controls="collapseExample") 
+              img(src="/svg/gist-secret.svg" style='padding-right: 5px;')
+              | Decrypt and Append
+            div(class="collapse", id="decrypt")
+              br
+              div(class="container" style="text-align: center;")
+                b(style='color: red') Note: 
+                | Each Decrypt and Append is 2 pulls. 1 for decryption, and 1 for the Extended Data.
+              a(class="btn btn-outline-dark btn-sm" data-toggle="collapse" href="#decrypt-help" role="button" aria-expanded="false" aria-controls="collapseExample") 
+                img(src="/svg/list-ordered.svg" style='padding-right: 5px;')
+                | Show Steps
+              br
+              br
+              div(id="decrypt-help", class="collapse alert alert-secondary")
+                span(class="font-weight-bold") Step 1:
+                br
+                | Make sure the spreadsheet has two columns. The first: SHA256, and the second: source/segment of the hash.
+                br
+                span(class="font-weight-bold") Step 2: 
+                br
+                | Press 'Choose File' and find your spreadsheet.
+                br
+                span(class="font-weight-bold") Step 3:
+                br
+                | Change the email if you so wish. Then hit upload and recieve a spreadsheet via e-mail with your new information.
+                br
+              if model != 'extendedData' && type == 'all'
+                div(class='form-group')
+                  div(class='custom-control custom-switch')
+                    input#includeScoresChk(type="checkbox" class="custom-control-input")
+                    label(class="custom-control-label" for="includeScoresChk") Include JuJu Scores
+              if user === 'hiveMind'
+                div(class='form-group')
+                  div(class='custom-control custom-switch')
+                    input#demo-only-chk(type="checkbox" class="custom-control-input")
+                    label(class="custom-control-label" for="demo-only-chk") Demo Only
+                  input(type='hidden', id='demo-only', name='demoOnly', value="false")
+              div(class='form-group')
+                div(class="input-group" )
+                  div(class="input-group-prepend" style="")
+                    span(class="input-group-text" style="") Send to: 
+                  input#send-to(type='text', name='sendTo', class="form-control" value=sendTo)
+              div(class='custom-file')
+                input#file-two(class="custom-file-input", type='file', name='file', accept=".csv, .xlsx", required)
+                label(id="file-tag" class="custom-file-label" for="file-two") Choose file...
+                div(class="invalid-feedback") Invalid File
+              div
+                br
+                button(class="btn btn-primary btn-lg btn-block" id='getUpload') Upload
+              input(type='hidden', value=user, id='username', name='username')
+              if model != 'extendedData' 
+                input(type='hidden', id='include-scores', name='includeScores', value="false")
+    br
+    br
+  include footer.pug
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js')
+  script(src=`/js/home.js`)
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous")
+  script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous")
