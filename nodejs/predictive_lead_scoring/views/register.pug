@@ -1,0 +1,74 @@
+html
+  head
+    title #{title} ‹ REDACTED
+    meta(name='description', content='SA')
+    link#favicon(rel='icon', href=`/img/ico.png`, type='image/x-icon')
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='../css/bootstrap.css')
+  body(style=`background-image:url("/img/ljbg4.jpg");background-color: rgb(248, 247, 238);`)
+    br
+    div(class='container')
+      img(src=`/img/logo.png`, style='width: 50%; display: block; padding: 15px; margin: auto;min-height:100px;')
+      form#iForm(method='post', action='/register', class="shadow-sm p-3 mb-5 bg-white rounded" style='opacity: 0.9; width: 75%; display: block; margin: auto;')
+        div(style="text-align:center;")
+          h1(class="display-4") Almost there!
+          h3(class="text-muted") But first, a few questions
+          small Make sure you register with the same email address you made your payment with. 
+          br
+          small If you purchased REDACTED, make sure to choose your desired model (you can always change your model later).
+        br
+        text#error(style='display:none; color: red;' name='error', value=error)
+        div(class='form-group')
+          div(class="input-group mb-3 input-group-lg" )
+            div(class="input-group-prepend")
+              label(class="input-group-text" for="mSel") Desired Model:
+            select#m-sel(class="custom-select form-control")
+              option(value='extendedData') I only purchased Extended Data
+              each val in modelNames
+                  option(value=val)='REDACTED: ' + val
+        input#model(type='hidden', name='model', value='extendedData')
+        div(class='form-group')
+          div(class="input-group mb-3 input-group-lg" )
+            div(class="input-group-prepend")
+              span(class="input-group-text") Your Name:
+            input#name(name='name', type='text', required='', class="form-control")
+        div(class='form-group')
+          div(class="input-group mb-3 input-group-lg" )
+            div(class="input-group-prepend")
+              span(class="input-group-text") Email:
+            input#email(name='email', type='text', required='', class="form-control")
+        div(class='form-group')
+          div(class="input-group mb-3 input-group-lg" )
+            div(class="input-group-prepend")
+              span(class="input-group-text") Username:
+            input#username(name='username', type='text', required='', class="form-control")
+        div(class='form-group')
+          div(class="input-group mb-3 input-group-lg" )
+            div(class="input-group-prepend")
+              span(class="input-group-text") Password:
+            input#password(name='password', type='password', required='', class="form-control")
+
+        div(class='form-group')
+          div(class="input-group mb-3 input-group-lg" )
+            div(class="input-group-prepend")
+              span(class="input-group-text") Confirm Password: 
+            input#password2(name='password2', type='password', required='', class="form-control")
+        #errorDef
+        br
+        input#submitForm(type='submit', style='width:100%;', class='btn btn-success btn-lg btn-block')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    script.
+      $(function() {
+        var z = $("#error").attr('value');
+        if(z && z != ''){
+             document.getElementById("error").style.display = '';
+             $("#error").html(z + '<br>');
+        }
+
+        $("#m-sel").change(function(){
+            var x = $('option:selected', this).attr('value');
+            $('#model').attr('value', x);
+        });
+      });

@@ -1,0 +1,67 @@
+html
+    head
+        title #{title} ‹ REDACTED
+        meta(name='description', content='SA')
+        link#favicon(rel='icon', href=`/img/ico.png`, type='image/x-icon')
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        link(rel='stylesheet', href='css/bootstrap.css')
+    body(style='margin-bottom: 60px;background-color: rgb(248, 247, 238);')
+        nav(aria-label='breadcrumb')
+            ol.breadcrumb
+                li.breadcrumb-item
+                    a(href='./home') Home
+                li.breadcrumb-item.active(aria-current='page') Settings
+        br       
+        .container
+            form(id='fullBody', class='fullbody', style='') 
+                div(class="alert alert-secondary" role="alert")
+                    h1(style='text-align:center;')
+                        span(class="badge") 
+                            img(style='width: 33px; padding-right: 10px;' src="/svg/tools.svg")
+                            text(style='color:black;') #{username}
+                    if model != 'extendedData' && model != 'Custom'
+                        h4 
+                            b Change Model:
+                        div(class="input-group mb-3")
+                            div(class="input-group-prepend")
+                                label(class="input-group-text" for="model") Predictive Model:
+                            select(name='model',value=model,id='model' class="custom-select")
+                                each val in modelNames
+                                    option(value=val)=val
+                    h4 
+                        b Change Email:
+                    .input-group.mb-3
+                        .input-group-prepend
+                            span(class="input-group-text") Account email:
+                        input(type='text', class="form-control", name='email',id='email', value=email, style='') 
+                    h4 
+                        b Renewal Date: 
+                        text(id='renewBy' value=renewal) #{renewal} 
+                    a(class="btn btn-outline-danger", href='https://REDACTED.com/cancelsub') Cancel Subscription
+                    br
+                    br
+                    h4 
+                        b Change Password:
+                    .input-group.mb-3
+                        .input-group-prepend
+                            span(class="input-group-text") Current password:
+                        input(type='password', class="form-control",name='oldPassword',id='oldPassword') 
+                    .input-group.mb-3
+                        .input-group-prepend
+                            span(class="input-group-text") New password:
+                        input(type='password', class="form-control", name='newPassword',id='newPassword') 
+                    input(type='hidden', id='throttle', value=sub)
+                    if(model == 'Custom')
+                        input(type='hidden', id='model', value=model)
+                    br
+                    .text-center.btn-group(role='group', style='width:100%;')
+                        button#save.btn.btn-outline-success.btn-lg(style='width:50%' type='button') Save
+                        button#backBtn.btn.btn-outline-dark.btn-lg(style='width:50%' type='button') Home
+                    br
+    include footer.pug
+
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js')
+
+    script(src=`/js/settings.js`)
