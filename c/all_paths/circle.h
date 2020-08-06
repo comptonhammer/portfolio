@@ -1,5 +1,5 @@
-#ifndef CIR
-#define CIR
+#ifndef CIRCLE_H
+#define CIRCLE_H
 
 #include <stdio.h>
 #include <stdlib.h>
