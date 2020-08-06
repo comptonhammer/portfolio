@@ -1,18 +1,20 @@
 //@ts-check
+let User = require('../models/users/users');
+
 let repository = require('./repository');
 let passport = require('../middleware/passport');
 let log = require('clg-color');
 let bcrypt = require('bcrypt');
-let findModelFromName = require('./predictive_models').findModelFromName;
-let getAllModelNamesExceptOnesThatIncludeTheStringsInThisArray = require('../models/predictivemodels/predictivemodels').getAllModelNamesExceptOnesThatIncludeTheStringsInThisArray;
-let User = require('../models/users/users');
-let changePassword = require('./users').changePassword;
+
+let { findModelFromName } = require('./predictive_models');
+let { getAllModelNamesExceptOnesThatIncludeTheStringsInThisArray } = require('../models/predictivemodels/predictivemodels');
+let { changePassword } = require('./users');
 
 function loginPage(req, res){
   if(req.user) 
     res.redirect('/home');
   else 
-    res.render('login',{title: "Login"});
+    res.render('login',{ title: "Login" });
 }
 
 function homePage(req, res){ //pred analytics home
@@ -37,6 +39,7 @@ function leadPage(req, res){ //pred analytics infopage
     state, 
     zip
   } = req.query;
+  
   res.render('info',{
     title: 'Lead',
     username: req.user.username,
@@ -54,8 +57,10 @@ function leadPage(req, res){ //pred analytics infopage
 
 function settingsPage(req, res){ //acct settings
     let renewalDate = 'Exempt';
+  
     if(req.user.subscription.renewal) 
       renewalDate = req.user.subscription.renewal;
+  
     getAllModelNamesExceptOnesThatIncludeTheStringsInThisArray(['extendedData','(Private)'], modelNames =>
       res.render('settings', {
         username: req.user.username,
@@ -76,7 +81,7 @@ function downloadTemplate(req, res){
 
 function logout(req, res){
     req.logout();
-    return res.redirect('/leadjuju');
+    return res.redirect('/');
 }
 
 function registerPage(req, res){ //login
@@ -88,7 +93,7 @@ function registerPage(req, res){ //login
 function sendFileToUser(req, res){
     const {file} = req.query;
     if(file.split('-')[0] == req.user.username)
-        repository.downloadFileToServer(file, (savedFilePath) => res.status(200).download(savedFilePath, file));
+        repository.downloadFileToServer(file, savedFilePath => res.status(200).download(savedFilePath, file));
 }
 
 function deleteFile(req, res){
@@ -101,9 +106,11 @@ function historyPage(req, res){
     const { username } = req.user;
     let { page } = req.query;
     if (page === undefined) page = 0;
+  
     repository.listHistoryWithDates(username + '-', (err, filesDates) => {
         if(err) 
           return res.send(err);
+      
         let arr = repository.paginate(filesDates, 6);
         if (page >= arr.length) 
           page = 0;
@@ -190,7 +197,7 @@ function updateSettings(req, res){
         if(err) 
           console.log('Couldnt update model,', err);
         else if(!changesMade) 
-          res.send({succMsg:'Success! Model updated'});
+          res.send({ succMsg:'Success! Model updated' });
         changesMade = true;
       })
     });
