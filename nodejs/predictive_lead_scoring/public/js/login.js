@@ -9,7 +9,7 @@ $('#i-form').submit(function(e){
                 window.location.replace(res.url)
             else {
                 document.getElementById("password").style.backgroundColor = "pink";
-                document.getElementById("error-def").innerHTML = "Hmm, we couldn't find that account, or the password is wrong. Give it another try or <a href='https://leadjuju.com/support'>contact us</a>."
+                document.getElementById("error-def").innerHTML = "Hmm, we couldn't find that account, or the password is wrong. Give it another try or <a href='https://REDACTED.com/support'>contact us</a>."
             }
         })
         .fail(xhr => {
