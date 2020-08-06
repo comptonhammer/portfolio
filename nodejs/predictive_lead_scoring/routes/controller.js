@@ -63,6 +63,7 @@ function settingsPage(req, res){ //acct settings
   
     getAllModelNamesExceptOnesThatIncludeTheStringsInThisArray(['extendedData','(Private)'], modelNames =>
       res.render('settings', {
+        title: 'Settings',
         username: req.user.username,
         sub: req.user.account.throttle,
         type: req.user.account.type,
