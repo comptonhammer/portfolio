@@ -15,7 +15,7 @@ function createNewLeadId(callback){
 
 function createManyNewLeadIds(amount, callback){
     Id.findOneAndUpdate({id: process.env.COUNTER_ID}, {$inc: {count: amount}}, {new: true}, (err, counter) => {
-        console.log(counter);
+        console.log('Id:', counter);
         if(err){ 
             logger.log('accounts', `Error creating multiple new Ids, more info- ${err}`);
             return callback(err);
