@@ -15,7 +15,7 @@ html
                 li.breadcrumb-item.active(aria-current='page') Settings
         br       
         .container
-            form(id='fullBody', class='fullbody', style='') 
+            form(id='full-body', class='fullbody', style='') 
                 div(class="alert alert-secondary" role="alert")
                     h1(style='text-align:center;')
                         span(class="badge") 
@@ -38,7 +38,7 @@ html
                         input(type='text', class="form-control", name='email',id='email', value=email, style='') 
                     h4 
                         b Renewal Date: 
-                        text(id='renewBy' value=renewal) #{renewal} 
+                        text(id='renew-by' value=renewal) #{renewal} 
                     a(class="btn btn-outline-danger", href='https://REDACTED.com/cancelsub') Cancel Subscription
                     br
                     br
@@ -47,11 +47,11 @@ html
                     .input-group.mb-3
                         .input-group-prepend
                             span(class="input-group-text") Current password:
-                        input(type='password', class="form-control",name='oldPassword',id='oldPassword') 
+                        input(type='password', class="form-control",name='oldPassword',id='old-password') 
                     .input-group.mb-3
                         .input-group-prepend
                             span(class="input-group-text") New password:
-                        input(type='password', class="form-control", name='newPassword',id='newPassword') 
+                        input(type='password', class="form-control", name='newPassword',id='new-password') 
                     input(type='hidden', id='throttle', value=sub)
                     if(model == 'Custom')
                         input(type='hidden', id='model', value=model)
