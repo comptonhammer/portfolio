@@ -115,12 +115,12 @@ html
     div(class='container')
       form(method='post', enctype='multipart/form-data', action='/upload', style='')
         div(class="shadow-sm p-3 mb-5 bg-white rounded")
-          a(class="btn btn-warning btn-lg btn-block" data-toggle="collapse" href="#quick-up" role="button" aria-expanded="false" aria-controls="collapseExample") 
+          a(class="btn btn-warning btn-lg btn-block" data-toggle="collapse" href="#quick-up" role="button" aria-expanded="false" aria-controls="") 
             img(src="/svg/package.svg" style='padding-right: 7px;')
             | Quick Upload
           div(class="collapse", id="quick-up")
             br
-            a(class="btn btn-outline-dark btn-sm" data-toggle="collapse" href="#upload-help" role="button" aria-expanded="false" aria-controls="collapseExample") 
+            a(class="btn btn-outline-dark btn-sm" data-toggle="collapse" href="#upload-help" role="button" aria-expanded="false" aria-controls="") 
               img(src="/svg/list-ordered.svg" style='padding-right: 5px;')
               | Show Steps
             br
@@ -148,7 +148,7 @@ html
               div(class="input-group" )
                 div(class="input-group-prepend" style="")
                   span(class="input-group-text" style="") Send to: 
-                input#sendTo(type='text', name='sendTo', class="form-control" value=sendTo)
+                input#send-to(type='text', name='sendTo', class="form-control" value=sendTo)
             div(class='custom-file')
               input#file(class="custom-file-input" type='file', name='filename', accept=".csv, .xlsx", required)
               label(id="file-tag" class="custom-file-label" for="file") Choose file...
@@ -160,7 +160,7 @@ html
       div(class='container')
         form(method='post', enctype='multipart/form-data', action='/bullet/decrypt', style='')
           div(class="shadow-sm p-3 mb-5 bg-white rounded")
-            a(class="btn btn-warning btn-lg btn-block" data-toggle="collapse" href="#decrypt" role="button" aria-expanded="false" aria-controls="collapseExample") 
+            a(class="btn btn-warning btn-lg btn-block" data-toggle="collapse" href="#decrypt" role="button" aria-expanded="false" aria-controls="") 
               img(src="/svg/gist-secret.svg" style='padding-right: 5px;')
               | Decrypt and Append
             div(class="collapse", id="decrypt")
@@ -168,7 +168,7 @@ html
               div(class="container" style="text-align: center;")
                 b(style='color: red') Note: 
                 | Each Decrypt and Append is 2 pulls. 1 for decryption, and 1 for the Extended Data.
-              a(class="btn btn-outline-dark btn-sm" data-toggle="collapse" href="#decrypt-help" role="button" aria-expanded="false" aria-controls="collapseExample") 
+              a(class="btn btn-outline-dark btn-sm" data-toggle="collapse" href="#decrypt-help" role="button" aria-expanded="false" aria-controls="") 
                 img(src="/svg/list-ordered.svg" style='padding-right: 5px;')
                 | Show Steps
               br
@@ -189,8 +189,8 @@ html
               if model != 'extendedData' && type == 'all'
                 div(class='form-group')
                   div(class='custom-control custom-switch')
-                    input#includeScoresChk(type="checkbox" class="custom-control-input")
-                    label(class="custom-control-label" for="includeScoresChk") Include JuJu Scores
+                    input#include-scores-chk(type="checkbox" class="custom-control-input")
+                    label(class="custom-control-label" for="include-scores-chk") Include JuJu Scores
               if user === 'hiveMind'
                 div(class='form-group')
                   div(class='custom-control custom-switch')
@@ -208,7 +208,7 @@ html
                 div(class="invalid-feedback") Invalid File
               div
                 br
-                button(class="btn btn-primary btn-lg btn-block" id='getUpload') Upload
+                button(class="btn btn-primary btn-lg btn-block" id='get-upload') Upload
               input(type='hidden', value=user, id='username', name='username')
               if model != 'extendedData' 
                 input(type='hidden', id='include-scores', name='includeScores', value="false")
