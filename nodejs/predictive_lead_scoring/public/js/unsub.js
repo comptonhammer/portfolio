@@ -1,4 +1,4 @@
-$('#iForm').submit(function(e){
+$('#i-form').submit(function(e){
     e.preventDefault();
     let cancel = confirm("This will cancel your subscription after this billing month (ie. after the month you already paid for). Continue?");
     if(cancel){
