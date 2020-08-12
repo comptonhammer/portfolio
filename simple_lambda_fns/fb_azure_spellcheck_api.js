@@ -40,7 +40,7 @@ exports.handler = async (event, ctx, cb) => {
 }
 
 function fixErrors(sentence, result){
-    for(var i = 0; result.flaggedTokens[i] != undefined ; i++) 
+    for(let i = 0; result.flaggedTokens[i] != undefined ; i++) 
         if(result.flaggedTokens[i].suggestions[0].score >= .3) 
             sentence = sentence.replace(result.flaggedTokens[i].token, result.flaggedTokens[i].suggestions[0].suggestion);
     return sentence;
