@@ -16,7 +16,7 @@ passport.use(new LocalStrategy( (username, password, done) => {
             return done(err);
         }
         else if(account){ 
-            bcrypt.compare(password, account.hash, function(err,res){
+            bcrypt.compare(password, account.hash, (err,res) => {
                 if(err){
                     logger.log(
                         'passport', 
@@ -45,11 +45,11 @@ passport.use(new LocalStrategy( (username, password, done) => {
     });
 }));
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser((user, done) => {
     done(null, user);
 });
 
-passport.deserializeUser(function(id, done) {
+passport.deserializeUser((id, done) => {
     UserAccount.findById(id, function(err, user) {
         done(err, user);
     });
