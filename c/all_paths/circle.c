@@ -30,7 +30,7 @@ JSAMPLE* getCircle(JSAMPLE* original_buf, long og_height, long og_width, POINT* 
   long height = circle.center_y * 2;
   int row_stride = og_width * 3;
 
-  JSAMPLE* _x = malloc(row_stride * height * sizeof(JSAMPLE));
+  JSAMPLE* temp = malloc(row_stride * height * sizeof(JSAMPLE));
 
   for(long index = 0; index < row_stride * og_height; index += 3){
     long y_val = index / row_stride;
@@ -40,17 +40,17 @@ JSAMPLE* getCircle(JSAMPLE* original_buf, long og_height, long og_width, POINT* 
         pointIsInCircle(x_val, y_val, circle) 
         && pointIsDrawableInPolygon(hooks, x_val, y_val, number_of_hooks)
         ){
-          _x[index] = image_buf[index]; //r
-          _x[index + 1] = image_buf[index + 1]; //g
-          _x[index + 2] = image_buf[index + 2]; //b
+          temp[index] = image_buf[index]; //r
+          temp[index + 1] = image_buf[index + 1]; //g
+          temp[index + 2] = image_buf[index + 2]; //b
         }
       else{ //Cast white
-        _x[index] = 255; //r
-        _x[index + 1] = 255; //g
-        _x[index + 2] = 255; //b
+        temp[index] = 255; //r
+        temp[index + 1] = 255; //g
+        temp[index + 2] = 255; //b
       }
     }
   }
   
-  return _x;
+  return temp;
 }
