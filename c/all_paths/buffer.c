@@ -1,20 +1,20 @@
 #include "buffer.h"
 
 _Bool writeBuffer(char* filename, JSAMPLE* original_buf, long height, long width){
-    JSAMPLE * img_buf;
-    img_buf = original_buf;
     struct jpeg_compress_struct cinfo;
     struct jpeg_error_mgr jerr;
-    FILE * outfile;		/* target file */
+    
+    JSAMPLE * img_buf;     
+    img_buf = original_buf;
+    
     JSAMPROW * row_pointer;	/* pointer to JSAMPLE row[s] */
-
-    long row_stride = width * 3;
-
     row_pointer = malloc(width * sizeof(JSAMPROW));
+    long row_stride = width * 3; // 3 to account for R,G,B
 
     cinfo.err = jpeg_std_error(&jerr);
     jpeg_create_compress(&cinfo);
-
+    
+    FILE * outfile;		/* target file */
     if ((outfile = fopen(filename, "wb")) == NULL) {
         fprintf(stderr, "can't open\n");
         return FALSE;
@@ -35,9 +35,11 @@ _Bool writeBuffer(char* filename, JSAMPLE* original_buf, long height, long width
         row_pointer[0] = &img_buf[cinfo.next_scanline * row_stride];
         jpeg_write_scanlines(&cinfo, row_pointer, 1);
     }
+    
     jpeg_finish_compress(&cinfo);
-    fclose(outfile);
     jpeg_destroy_compress(&cinfo);
+    
+    fclose(outfile);
 
     free(row_pointer);
     return TRUE;
