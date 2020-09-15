@@ -36,7 +36,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
-app.get('/test/email', (req, res) => res.render('email_templates/email_consultant', {name: 'Alec', email: 'alec@hivemindai.com'}))
+app.get('/test/email', (req, res) => res.render('email_templates/email_consultant', {name: 'Alec', email: 'alec@________.com'}))
 
 require('./routes/router')(app);// Don't use app.set. 
                                 // This is passed by "reference" since its an object/class.
