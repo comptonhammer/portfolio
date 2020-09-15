@@ -20,16 +20,16 @@ exports.handler = async (event, ctx, cb) => {
         }
     };
     
-    let response_handler = function (response) {
+    let response_handler = response => {
         let body = '';
         response.on ('data', function (d) {
             body += d;
         });
-        response.on ('end', function () {
+        response.on ('end', () => {
             const fixedText = fixErrors(text, JSON.parse(body));
             cb(null, fixedText);
         });
-        response.on ('error', function (e) {
+        response.on ('error', e => {
             console.log ('Error: ' + e.message);
         });
     };
