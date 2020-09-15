@@ -85,11 +85,11 @@ POINT* createPolygon(long height, long width, int sides){
     polygon[i].y = (int) (sin((2*i*PI)/sides)*(height/2) + width/2);
   }
 
-  for(int _dj = 0; _dj < width * 3 * height; _dj++) 
-    temp[_dj] = 255;
+  for(int i = 0; i < width * 3 * height; i++) 
+    temp[i] = 255;
 
-  for(int _zzz = 0; _zzz < sides; _zzz++){
-    int index = (polygon[_zzz].x)*3 + height*(polygon[_zzz].y) * 3;
+  for(int i = 0; i < sides; i++){
+    int index = (polygon[i].x)*3 + height*(polygon[i].y) * 3;
     temp[index] = 0;
     temp[index + 1] = 0;
     temp[index + 2] = 0;
