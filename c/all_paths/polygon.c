@@ -77,7 +77,7 @@ _Bool pointIsDrawableInPolygon(POINT polygon[], long x, long y, int sides){
 }
 
 POINT* createPolygon(long height, long width, int sides){
-  JSAMPLE* _x = malloc(width * 3 * height * sizeof(JSAMPLE));
+  JSAMPLE* temp = malloc(width * 3 * height * sizeof(JSAMPLE));
   POINT* polygon = malloc(sides*sizeof(POINT));
 
   for(int i = 0; i < sides; i++){
@@ -85,15 +85,16 @@ POINT* createPolygon(long height, long width, int sides){
     polygon[i].y = (int) (sin((2*i*PI)/sides)*(height/2) + width/2);
   }
 
-  for(int _dj = 0; _dj < width * 3 * height; _dj++) _x[_dj] = 255;
+  for(int _dj = 0; _dj < width * 3 * height; _dj++) 
+    temp[_dj] = 255;
 
   for(int _zzz = 0; _zzz < sides; _zzz++){
     int index = (polygon[_zzz].x)*3 + height*(polygon[_zzz].y) * 3;
-    _x[index] = 0;
-    _x[index + 1] = 0;
-    _x[index + 2] = 0;
+    temp[index] = 0;
+    temp[index + 1] = 0;
+    temp[index + 2] = 0;
   }
 
-  free(_x);
+  free(temp);
   return polygon;
 }
